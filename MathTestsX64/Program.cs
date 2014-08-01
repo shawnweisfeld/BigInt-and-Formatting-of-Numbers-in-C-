@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MathTestsX64
 {
@@ -40,14 +39,26 @@ namespace MathTestsX64
 
         private static void BigIntTest()
         {
-            
-            BigInteger bi = BigInteger.Parse("-903145792771643190182");
+            BigInteger value = BigInteger.Parse("-903145792771643190182");
 
             Console.WriteLine("BigInt values are truncated.");
-            Console.WriteLine("flat\t{0}", bi);
-            Console.WriteLine("E8\t{0:E8}", bi);
-            Console.WriteLine("E\t{0:E}", bi);
-            Console.WriteLine("E4\t{0:E4}\n\n", bi);
+            Console.WriteLine("big int flat\t{0}", value);
+            Console.WriteLine("big int E8\t{0:E8}", value);
+            Console.WriteLine("big int E\t{0:E}", value);
+            Console.WriteLine("big int E4\t{0:E4}\n\n", value);
+
+            //http://msdn.microsoft.com/en-us/library/dd268227(v=vs.110).aspx?cs-save-lang=1&cs-lang=vb#code-snippet-2
+            NumberFormatInfo bigIntegerFormatter = new NumberFormatInfo();
+            bigIntegerFormatter.NegativeSign = "~";
+            string[] specifiers = { "C", "D", "D25", "E", "E4", "e8", "F0", 
+                        "G", "N0", "P", "R", "X", "0,0.000", 
+                        "#,#.00#;(#,#.00#)" };
+
+            foreach (string specifier in specifiers)
+                Console.WriteLine("{0}: {1}", specifier, value.ToString(specifier,
+                                  bigIntegerFormatter));
+
+            Console.WriteLine("\n\n", value);
         }
 
         private static void LongTest()
