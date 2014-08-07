@@ -13,14 +13,14 @@ namespace MathTestsX86
             Console.WriteLine("Are they the same in 32 bit?");
 
             //#1
-            DoubleTest();   
+           // DoubleTest();   
 
             //#2
             BigIntTest();
-            LongTest();
+           // LongTest();
 
             //#3
-            BigIntDoubleTest();
+           // BigIntDoubleTest();
 
             Console.ReadKey();
         }
@@ -38,23 +38,29 @@ namespace MathTestsX86
 
         private static void BigIntTest()
         {
-            BigInteger value = BigInteger.Parse("-903145792771643190182");
+            BigInteger value = BigInteger.Parse("903145792771643190182");
 
             Console.WriteLine("BigInt values are truncated.");
             Console.WriteLine("big int flat\t{0}", value);
+
             Console.WriteLine("big int E8\t{0:E8}", value);
             Console.WriteLine("big int E\t{0:E}", value);
-            Console.WriteLine("big int E4\t{0:E4}\n\n", value);
+            Console.WriteLine("big int E4\t{0:E4}\n", value);
 
-            NumberFormatInfo bigIntegerFormatter = new NumberFormatInfo();
-            bigIntegerFormatter.NegativeSign = "~";
-            string[] specifiers = { "C", "D", "D25", "E", "E4", "e8", "F0", 
-                        "G", "N0", "P", "R", "X", "0,0.000", 
-                        "#,#.00#;(#,#.00#)" };
+            Console.WriteLine("big int2 E8\t{0}", value.ToEngineeringString(8));
+            Console.WriteLine("big int2 E\t{0}", value.ToEngineeringString());
+            Console.WriteLine("big int2 E4\t{0}\n\n", value.ToEngineeringString(4));
 
-            foreach (string specifier in specifiers)
-                Console.WriteLine("{0}: {1}", specifier, value.ToString(specifier,
-                                  bigIntegerFormatter));
+
+            //NumberFormatInfo bigIntegerFormatter = new NumberFormatInfo();
+            //bigIntegerFormatter.NegativeSign = "~";
+            //string[] specifiers = { "C", "D", "D25", "E", "E4", "e8", "F0", 
+            //            "G", "N0", "P", "R", "X", "0,0.000", 
+            //            "#,#.00#;(#,#.00#)" };
+
+            //foreach (string specifier in specifiers)
+            //    Console.WriteLine("{0}: {1}", specifier, value.ToString(specifier,
+            //                      bigIntegerFormatter));
 
             Console.WriteLine("\n\n", value);
         }
